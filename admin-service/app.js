@@ -1,23 +1,22 @@
 const express = require('express');
-const pino = require('pino');
 require('dotenv').config();
 
+const requestLogger = require('./middlewares/logger.middleware');
+const pino = require('pino');
+
 const app = express();
-const logger = pino({ level: 'info', transport: { target: 'pino-pretty' } });
+const logger = pino({ level: 'info' });
 
 app.use(express.json());
 
-// Logging middleware
-app.use((req, res, next) => {
-  logger.info({ method: req.method, url: req.url, service: 'admin-service' });
-  next();
-});
+// request logging middleware
+app.use(requestLogger);
 
 // Routes
 const adminRoutes = require('./routes/admin.routes');
 app.use('/api', adminRoutes);
 
-// Error handler
+// error handler uses pino logger
 app.use((err, req, res, next) => {
   logger.error(err);
   res.status(500).json({ id: 'SERVER_ERROR', message: err.message });

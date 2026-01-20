@@ -4,10 +4,10 @@ import sys
 filename = input("filename=")
 
 # Service URLs - Update these with your deployed URLs
-a = "https://logs-service-yssj.onrender.com" #"http://localhost:3001"  # Logs Service
-b = "https://users-service-snzw.onrender.com" #"http://localhost:3002"  # Users Service
-c = "https://cost-manager-sevices-fn07.onrender.com" #"http://localhost:3003"  # Costs Service
-d = "https://cost-manager-sevices.onrender.com" #"http://localhost:3004"  # Admin Service
+a = "http://localhost:3001"  # Logs Service
+b = "http://localhost:3002"  # Users Service
+c = "http://localhost:3003"  # Costs Service
+d = "http://localhost:3004"  # Admin Service
 
 output = open(filename, "w")
 sys.stdout = output

@@ -7,6 +7,9 @@ const app = express();
 const logger = pino({ level: 'info', transport: { target: 'pino-pretty' } });
 app.use(express.json());
 
+const loggerMiddleware = require('./middlewares/logger.middleware');
+app.use(loggerMiddleware);
+
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => logger.info('MongoDB connected for Logs Service'))
